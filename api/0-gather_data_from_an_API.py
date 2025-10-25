@@ -1,28 +1,20 @@
 #!/usr/bin/python3
 """
-This script retrieves and displays an employee's completed tasks from a fake REST API.
+Fetch and display employee task completion data from JSONPlaceholder API.
 
-The program uses the JSONPlaceholder API to fetch:
-- Employee details (name)
-- Tasks assigned to the employee
-
-It then prints:
-- The employee’s name
-- How many tasks they have completed out of the total
-- The titles of all completed tasks
+This script retrieves information about a specific employee and their tasks,
+then prints how many tasks they've completed along with the titles of those
+tasks.
 
 Usage:
-    python3 script_name.py <employee_id>
-
-Example:
-    python3 employee_tasks.py 2
+    python3 0-gather_data_from_an_API.py <employee_id>
 """
 
 import sys
 import requests
 
-# Base URL of the fake REST API
 BASE_URL = "https://jsonplaceholder.typicode.com"
+
 
 def employee_task(employee_id):
     """
@@ -35,22 +27,25 @@ def employee_task(employee_id):
         SystemExit: If there is a connection or request error.
     """
     try:
-        # Fetch employee details
-        employee_response = requests.get(f"{BASE_URL}/users/{employee_id}")
-        employee_response.raise_for_status()  # Raises an error for bad responses (e.g. 404, 500)
+        employee_response = requests.get(
+            f"{BASE_URL}/users/{employee_id}"
+        )
+        employee_response.raise_for_status()
         employee_data = employee_response.json()
         employee_name = employee_data.get("name")
 
-        # Fetch tasks for the employee
-        tasks_response = requests.get(f"{BASE_URL}/todos?userId={employee_id}")
+        tasks_response = requests.get(
+            f"{BASE_URL}/todos?userId={employee_id}"
+        )
         tasks_response.raise_for_status()
         tasks = tasks_response.json()
 
-        # Filter completed tasks
-        completed_tasks = [task for task in tasks if task.get("completed")]
+        completed_tasks = [t for t in tasks if t.get("completed")]
 
-        # Print summary
-        print(f"Employee {employee_name} is done with tasks ({len(completed_tasks)}/{len(tasks)}):")
+        print(
+            f"Employee {employee_name} is done with tasks "
+            f"({len(completed_tasks)}/{len(tasks)}):"
+        )
         for task in completed_tasks:
             print(f"\t {task.get('title')}")
 
@@ -61,12 +56,13 @@ def employee_task(employee_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 script_name.py <employee_id>")
+        print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
         sys.exit(1)
+
     try:
         employee_id = int(sys.argv[1])
         employee_task(employee_id)
     except ValueError:
         print("Employee ID must be an integer.")
         sys.exit(1)
-		
+
