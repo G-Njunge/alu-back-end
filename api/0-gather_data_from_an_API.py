@@ -32,7 +32,7 @@ def employee_task(employee_id):
         )
         employee_response.raise_for_status()
         employee_data = employee_response.json()
-        employee_name = employee_data.get("name")
+        EMPLOYEE_NAME = employee_data.get("name")
 
         tasks_response = requests.get(
             f"{BASE_URL}/todos?userId={employee_id}"
@@ -43,7 +43,7 @@ def employee_task(employee_id):
         completed_tasks = [t for t in tasks if t.get("completed")]
 
         print(
-            f"Employee {employee_name} is done with tasks "
+            f"Employee {EMPLOYEE_NAME} is done with tasks "
             f"({len(completed_tasks)}/{len(tasks)}):"
         )
         for task in completed_tasks:
