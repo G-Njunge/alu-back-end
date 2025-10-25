@@ -9,6 +9,8 @@ def employee_task(employee_id):
 	'''
 	the documentation
 	it is not working for now
+	args:
+	    employee(int): The ID of the employee
 	'''
 	try:
 		employee_raw_data = requests.get(f"{base_url}/users/{employee_id}")
