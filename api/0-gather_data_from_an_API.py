@@ -9,9 +9,9 @@ tasks.
 Usage:
     python3 0-gather_data_from_an_API.py <employee_id>
 """
-
-import sys
+import json
 import requests
+import sys
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 
@@ -65,4 +65,3 @@ if __name__ == "__main__":
     except ValueError:
         print("Employee ID must be an integer.")
         sys.exit(1)
-
