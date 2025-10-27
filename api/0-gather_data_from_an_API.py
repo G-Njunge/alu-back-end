@@ -9,7 +9,6 @@ tasks.
 Usage:
     python3 0-gather_data_from_an_API.py <employee_id>
 """
-import json
 import requests
 import sys
 
@@ -42,10 +41,7 @@ def employee_task(employee_id):
 
         completed_tasks = [t for t in tasks if t.get("completed")]
 
-        print(
-            f"Employee {EMPLOYEE_NAME} is done with tasks "
-            f"({len(completed_tasks)}/{len(tasks)}):"
-        )
+        print(f"Employee {EMPLOYEE_NAME} is done with tasks({len(completed_tasks)}/{len(tasks)}):")
         for task in completed_tasks:
             print(f"\t {task.get('title')}")
 
