@@ -6,6 +6,7 @@ from a REST API.
 import requests
 import sys
 
+
 def main():
     """Main entry point of the script."""
     if len(sys.argv) != 2:
