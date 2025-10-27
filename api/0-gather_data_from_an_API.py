@@ -3,10 +3,8 @@
 Fetches and displays information about an employee's TODO list progress
 from a REST API.
 """
-
-import sys
 import requests
-
+import sys
 
 def main():
     """Main entry point of the script."""
