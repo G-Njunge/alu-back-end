@@ -36,7 +36,7 @@ if __name__ == "__main__":
     ##Exporting employee data in csv format
     filename = "{}.csv".format(employee_id)
     with open(filename, mode="w", newline="") as csv_file:
-        writer = csv.writer(csv_file)
+        writer = csv.writer(csv_file,quoting=csv.QUOTE_ALL )
         writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         for task in todos:
             writer.writerow([employee_id, employee_name, task.get("completed"), task.get("title")])
